@@ -9,7 +9,6 @@ from sqlalchemy import create_engine
 from shapely.geometry.multipolygon import MultiPolygon
 import re
 from shapely import wkt
-import geopandas as gpd
 import pandas as pd
 import json
 import requests
