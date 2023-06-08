@@ -17,8 +17,8 @@ import xmltodict
 #import h3
 import requests_cache
 import shapely as shp
-import geowrangler
-from geowrangler import grids
+#import geowrangler
+#from geowrangler import grids
 
 #Define the hex size
 hex_granularity=8
