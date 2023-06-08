@@ -15,7 +15,7 @@ import json
 import requests
 import numpy as np
 import xmltodict
-import h3
+#import h3
 import requests_cache
 import shapely as shp
 import geowrangler
