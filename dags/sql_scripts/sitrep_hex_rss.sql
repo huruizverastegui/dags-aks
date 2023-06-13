@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS disasters_hex (
 	"eventtype" text NULL,
 	"h3_08" text NULL,
 	"update_date" timestamp NULL,
+	"gid1" varchar NULL,
 	"gid2" varchar NULL
 ); 
 
