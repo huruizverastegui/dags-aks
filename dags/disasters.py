@@ -83,7 +83,14 @@ def is_in_eapr(disaster_name):
     else :
         return 0
 
+def get_bbox(row):
+    if row == None:
+        results=None 
+    else:
+        results= shapely.geometry.box(*row.bounds, ccw=True)
+    return results
 
+    
 # function used to get the bbox in the proper format in the case we extract the info from the RSS flux 
 def get_bbox_format_rss(bbox):
     return list(np.float_(bbox.split(" ")))
@@ -388,10 +395,10 @@ def get_latest_disasters_rss():
     summary["geo_url"]="https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype="+summary["gdacs:eventtype"]+"&eventid="+summary["gdacs:eventid"]
 
     #tranform the bbox string into a proper list of float                           
-    summary['gdacs:bbox'] = summary['gdacs:bbox'].apply(get_bbox_format_rss)
+    #summary['gdacs:bbox'] = summary['gdacs:bbox'].apply(get_bbox_format_rss)
 
     #transform the list into a shapely geometry
-    summary['gdacs:bbox'] = summary['gdacs:bbox'].apply(make_shapely_bbox)
+    #summary['gdacs:bbox'] = summary['gdacs:bbox'].apply(make_shapely_bbox)
 
     #Open the url , extract the list of points as a polygon and transform it into a shapely geometry
     #summary['geometry_1'] = summary['gdacs:cap'].apply(get_polygon_rss)
@@ -406,6 +413,11 @@ def get_latest_disasters_rss():
     #Open the url , extract the list of points as a polygon and transform it into a shapely geometry
     summary['geometry_validated'] = summary.apply(lambda x: get_orange_geometries(x['geo_url'], x['gdacs:eventtype']), axis=1)
 
+    
+    
+    # get the bbox based on the geometry 
+    summary['bbox']=summary['geometry'].apply(get_bbox)
+    
     #add DB update date
     summary['update_date'] =today_date
 
