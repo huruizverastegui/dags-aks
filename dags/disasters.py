@@ -76,7 +76,9 @@ country_list_eapr= ["Australia",
 regexp_eapr_str= ('|').join(country_list_eapr)
 
 def is_in_eapr(disaster_name):
-    if re.search(regexp_eapr_str.lower().replace(" ", ""), disaster_name.lower().replace(" ", "")):
+    if  disaster_name is NULL 
+        return 1 
+    elif re.search(regexp_eapr_str.lower().replace(" ", ""), disaster_name.lower().replace(" ", "")):
         return 1
     else :
         return 0
@@ -362,6 +364,7 @@ def get_latest_disasters_rss():
     important_events = important_events[important_events['gdacs:eventtype'].isin(['EQ','TC','FL','VO'])]
 
    # keep only the disasters in the region 
+
     important_events['is_in_eapr']=important_events['gdacs:country'].apply(is_in_eapr)
 
     important_events=important_events[important_events['is_in_eapr']==1]
