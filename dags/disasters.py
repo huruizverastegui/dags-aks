@@ -345,13 +345,6 @@ def get_h3(row):
 def make_event_id_from_url(url):
     return url.split('https://www.gdacs.org/report.aspx?eventid=')[1].split('&')[0]
 
-#function used to get bbox from the geo url in the case we extract the info from the gdac-api library
-# requests from the geo url and get the bbox
-def get_bbox(geojson_url):
-    geom = requests.get(geojson_url).json()
-    bboxes = [f for f in geom['features'] if 'bbox' in f.keys()]
-    bboxes = [b['bbox'] for b in bboxes]
-    return max(bboxes, key=lambda x: x[2]-x[0])
 
 # redefine GDACS api from RSS flow
 def get_latest_disasters_rss():
