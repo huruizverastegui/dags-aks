@@ -76,7 +76,7 @@ country_list_eapr= ["Australia",
 regexp_eapr_str= ('|').join(country_list_eapr)
 
 def is_in_eapr(disaster_name):
-    if  disaster_name is NULL 
+    if  disaster_name is None
         return 1 
     elif re.search(regexp_eapr_str.lower().replace(" ", ""), disaster_name.lower().replace(" ", "")):
         return 1
