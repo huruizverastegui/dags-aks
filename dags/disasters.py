@@ -416,6 +416,8 @@ def get_latest_disasters_rss():
     
     
     # get the bbox based on the geometry 
+    summary = gpd.GeoDataFrame(summary)
+    summary.set_crs('epsg:4326')
     summary['gdacs:bbox']=summary['geometry'].apply(get_bbox)
     
     #add DB update date
