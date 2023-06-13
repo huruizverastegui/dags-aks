@@ -15,5 +15,5 @@ CREATE TABLE  disasters_hex_inter (
 	"h3_08" text NULL,
 	"update_date" timestamp NULL
 ); 
---CREATE INDEX ON disasters_hex(event_id, h3)
+CREATE INDEX ON disasters_hex(event_id, h3_08)
 
