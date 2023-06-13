@@ -70,7 +70,8 @@ country_list_eapr= ["Australia",
                    "Tonga",
                    "Tuvalu",
                    "Vanuatu",
-                   "Vietnam"] 
+                   "Vietnam",
+                   "Canada"] 
 
 
 regexp_eapr_str= ('|').join(country_list_eapr)
