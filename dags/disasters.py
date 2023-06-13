@@ -70,7 +70,7 @@ country_list_eapr= ["Australia",
                    "Tonga",
                    "Tuvalu",
                    "Vanuatu",
-                   "Viet Nam"] 
+                   "Vietnam"] 
 
 
 regexp_eapr_str= ('|').join(country_list_eapr)
@@ -357,8 +357,14 @@ def get_latest_disasters_rss():
     eventsframe['gdacs:alertscore'] = eventsframe['gdacs:alertscore'].astype(float)
 
     #keep only events where alertscore >=1 and EQ/TC/FL/VO 
-    important_events = eventsframe[eventsframe['gdacs:alertscore']>=0]
+    important_events = eventsframe[eventsframe['gdacs:alertscore']>=1]
+   # important_events = eventsframe[eventsframe['gdacs:eventtype']=='VO']
     important_events = important_events[important_events['gdacs:eventtype'].isin(['EQ','TC','FL','VO'])]
+
+   # keep only the disasters in the region 
+    important_events['is_in_eapr']=important_events['gdacs:country'].apply(is_in_eapr)
+
+    important_events=important_events[important_events['is_in_eapr']==1]
 
     # keep only important columns
     summary=important_events[['gdacs:eventid',
