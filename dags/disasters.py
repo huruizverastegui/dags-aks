@@ -362,7 +362,7 @@ def get_latest_disasters_rss():
     #keep only events where alertscore >=1 and EQ/TC/FL/VO 
     important_events = eventsframe[eventsframe['gdacs:alertscore']>=1]
    # important_events = eventsframe[eventsframe['gdacs:eventtype']=='VO']
-    important_events = important_events[important_events['gdacs:eventtype'].isin(['EQ','TC','FL','VO'])]
+   # important_events = important_events[important_events['gdacs:eventtype'].isin(['EQ','TC','FL','VO'])]
 
    # keep only the disasters in the region 
 
