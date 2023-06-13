@@ -359,7 +359,7 @@ def get_latest_disasters_rss():
     eventsframe['gdacs:alertscore'] = eventsframe['gdacs:alertscore'].astype(float)
 
     #keep only events where alertscore >=1 and EQ/TC/FL/VO 
-    important_events = eventsframe[eventsframe['gdacs:alertscore']>=0]
+    important_events = eventsframe[eventsframe['gdacs:alertscore']>=0.9]
    # important_events = eventsframe[eventsframe['gdacs:eventtype']=='VO']
     important_events = important_events[important_events['gdacs:eventtype'].isin(['EQ','TC','FL','VO'])]
 
