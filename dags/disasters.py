@@ -87,7 +87,7 @@ def get_bbox(row):
     if row == None:
         results=None 
     else:
-        results= shapely.geometry.box(*row.bounds, ccw=True)
+        results= shp.geometry.box(*row.bounds, ccw=True)
     return results
 
     
