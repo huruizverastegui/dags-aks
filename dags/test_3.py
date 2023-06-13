@@ -386,10 +386,10 @@ def pg_extract_hex(copy_sql):
 
 with DAG(
     ## MANDATORY 
-    dag_id='sitrep_disasters',
+    dag_id='sitrep_disasters_test',
     start_date=datetime(2022,11,28),
     default_args=default_args,
-    description='sitrep disasters',
+    description='sitrep disasters test',
     schedule_interval='@daily',
     # no need to catch up on the previous runs
     catchup=False
