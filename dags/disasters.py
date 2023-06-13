@@ -416,7 +416,7 @@ def get_latest_disasters_rss():
     
     
     # get the bbox based on the geometry 
-    summary['bbox']=summary['geometry'].apply(get_bbox)
+    summary['gdacs:bbox']=summary['geometry'].apply(get_bbox)
     
     #add DB update date
     summary['update_date'] =today_date
