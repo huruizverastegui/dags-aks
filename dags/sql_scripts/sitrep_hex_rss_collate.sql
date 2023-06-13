@@ -1,6 +1,6 @@
 
 INSERT INTO disasters_hex
-(SELECT dhi.*, ah.gid2 FROM disasters_hex_inter dhi
+(SELECT dhi.*, ah.gid1, ah.gid2 FROM disasters_hex_inter dhi
 LEFT JOIN adm2_hex ah
 on dhi.h3_08=ah.h3_08)
 ;
