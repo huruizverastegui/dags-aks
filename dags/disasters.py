@@ -37,6 +37,50 @@ default_args={
 
 today_date=datetime.now()
 
+#country list for eapro region - to filter 
+
+country_list_eapr= ["Australia",
+                   "Brunei",
+                   "Cambodia",
+                   "Cook",
+                   "Fiji",
+                   "Indonesia",
+                   "China",
+                   "Japan",
+                   "Korea",
+                   "Kiribati",
+                   "Laos",
+                   "Malaysia",
+                   "Marshall",
+                   "Micronesia",
+                   "Mongolia",
+                   "Myanmar",
+                   "Nauru",
+                   "Zealand",
+                   "Niue",
+                   "Palau",
+                   "Papua",
+                   "Philippines",
+                   "Samoa",
+                   "Singapore",
+                   "Solomon",
+                   "Thailand",
+                   "Taiwan",
+                   "Timor",
+                   "Tonga",
+                   "Tuvalu",
+                   "Vanuatu",
+                   "Viet Nam"] 
+
+
+regexp_eapr_str= ('|').join(country_list_eapr)
+
+def is_in_eapr(disaster_name):
+    if re.search(regexp_eapr_str.lower().replace(" ", ""), disaster_name.lower().replace(" ", "")):
+        return 1
+    else :
+        return 0
+
 
 # function used to get the bbox in the proper format in the case we extract the info from the RSS flux 
 def get_bbox_format_rss(bbox):
@@ -313,8 +357,7 @@ def get_latest_disasters_rss():
     eventsframe['gdacs:alertscore'] = eventsframe['gdacs:alertscore'].astype(float)
 
     #keep only events where alertscore >=1 and EQ/TC/FL/VO 
-    important_events = eventsframe[eventsframe['gdacs:alertscore']>=1]
-   # important_events = eventsframe[eventsframe['gdacs:eventtype']=='VO']
+    important_events = eventsframe[eventsframe['gdacs:alertscore']>=0]
     important_events = important_events[important_events['gdacs:eventtype'].isin(['EQ','TC','FL','VO'])]
 
     # keep only important columns
