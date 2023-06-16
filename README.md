@@ -37,7 +37,9 @@ CD into the folder containing the code
 az group create --name sitrep_registry --location eastus
 
 #create the container registry
+
 az acr create --resource-group sitrep_registry --name sitrepback --sku Basic --admin-enabled true
+
 
 ACR_PASSWORD=$(az acr credential show \
 --resource-group sitrep_registry \
