@@ -33,7 +33,7 @@ az appservice plan create \
 
 CD into the folder containing the code 
 
-#not needed if the resource group has already been created 
+#not needed if the resource group has already been created
 az group create --name sitrep_registry --location eastus
 
 #create the container registry
