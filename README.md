@@ -9,7 +9,7 @@
 
 We chosed to go with Azure as this is the Cloud Provided our Valencia team is the most familiar with and we should be able to transition it to them as soon as we have some budget 
 
-### Pipeline orchestrator 
+### Pipeline orchestrator : Airflow
 
 Decided to go with Airflow as it's widely used open source tool and the team is already familiar with it. 
 There were several options within Azure: 
