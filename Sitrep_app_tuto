@@ -14,10 +14,33 @@ az appservice plan create \
 --sku B1 \
 --is-linux
 
+#create the container registry
+az acr create --resource-group sitrep_registry \
+--name sitrepfront --sku Basic --admin-enabled true
+
+#define ACR password
+ACR_PASSWORD=$(az acr credential show \
+--resource-group sitrep_registry \
+--name sitrepfront \
+--query "passwords[?name == 'password'].value" \
+--output tsv)
+
+#build the docker image
+az acr build \
+  --resource-group sitrep_registry \
+  --registry sitrepback \
+  --image sitrepfront:latest .
+
+#deploy the web app #the container password needs to be retrieved from the access keys in azure UI 
+az webapp create \
+--resource-group sitrep_registry \
+--plan webplan --name sitrep-fdtn \
+--docker-registry-server-password <containerpassword> \
+--docker-registry-server-user sitrepfront \
+--role acrpull \
+--deployment-container-image-name sitrep-fdtn.azurecr.io/sitrepfront:latest
 
 # Deploy backend Sitrep
-
-
 
 #not needed if the resource group has already been created 
 az group create --name sitrep_registry --location eastus
