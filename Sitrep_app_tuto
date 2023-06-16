@@ -28,7 +28,7 @@ ACR_PASSWORD=$(az acr credential show \
 #build the docker image
 az acr build \
   --resource-group sitrep_registry \
-  --registry sitrepback \
+  --registry sitrepfront \
   --image sitrepfront:latest .
 
 #deploy the web app #the container password needs to be retrieved from the access keys in azure UI 
