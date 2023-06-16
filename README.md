@@ -22,6 +22,13 @@ There were several options within Azure:
 #create the resource group 
 az group create --name sitrep_registry --location eastus
 
+#create the webplan to host the apps
+az appservice plan create \
+--name webplan \
+--resource-group sitrep_registry \
+--sku B1 \
+--is-linux
+
 ### Deploy backend Sitrep
 
 CD into the folder containing the code 
@@ -32,29 +39,24 @@ az group create --name sitrep_registry --location eastus
 #create the container registry
 az acr create --resource-group sitrep_registry --name sitrepback --sku Basic --admin-enabled true
 
-
-
 ACR_PASSWORD=$(az acr credential show \
---resource-group <registryname> \
---name <containername> \
+--resource-group sitrep_registry \
+--name sitrepback \
 --query "passwords[?name == 'password'].value" \
 --output tsv)
 
+#build the docker image
 az acr build \
-  --resource-group <registryname> \
-  --registry <containername> \
-  --image webappsimple:latest .
+  --resource-group sitrep_registry \
+  --registry sitrepback \
+  --image sitrepback:latest .
 
-az appservice plan create \
---name webplan \
---resource-group <registryname> \
---sku B1 \
---is-linux
-
+#deploy the web app
+#the container password needs to be retrieved from the access keys in azure UI
 az webapp create \
---resource-group <registryname> \
---plan webplan --name <appname> \
+--resource-group sitrep_registry \
+--plan webplan --name sitrepapi \
 --docker-registry-server-password <containerpassword> \
---docker-registry-server-user <containername> \
+--docker-registry-server-user sitrepback \
 --role acrpull \
---deployment-container-image-name <containername>.azurecr.io/webappsimple:latest
+--deployment-container-image-name sitrepback.azurecr.io/sitrepback:latest
