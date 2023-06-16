@@ -29,7 +29,7 @@ az acr create --resource-group sitrep_registry \
 #define ACR password
 ACR_PASSWORD=$(az acr credential show \
 --resource-group sitrep_registry \
---name sitrepback\
+--name sitrepback \
 --query "passwords[?name == 'password'].value" \
 --output tsv)
 
