@@ -77,7 +77,7 @@ cache_timeout = os.getenv("CACHE_TIMEOUT", 1)
 
 import h3pandas
 import pandas as pd
-#import geopandas as gpd
+import geopandas as gpd
 from typing import List
 import datetime
 
@@ -408,7 +408,7 @@ async def get_sitrep(
 ):
     # disasters = session.query(Disaster).order_by(desc("fromdate")).limit(20)
     disasters = session.query(Disaster).filter(Disaster.fromdate > "2022-05-01")
-    good_ones = [1000922, 1000965, 1359959, 1353717, 1000057, 1101710, 1353543, 1101875,1367745,1000961,1000966,1347295,1356811,1101778,1353717,1347183, 1343617, 1000937, 1000915, 1337179]
+    good_ones = [1000976, 1000072, 1000974, 1102044, 1102000, 1000970, 1370936, 1367745,1000966,1000965,1359959,1356811,1101778,1353717,1353543,1000057,1347295,1347183,1101710]
     response = list()
     for disaster in disasters:
         if disaster.event_id in good_ones:
@@ -578,7 +578,7 @@ async def get_population_by_region(event_id: int, session: Session = Depends(get
 
 @app.get("/demo/disaster")
 def return_demo(session: Session = Depends(get_db)):
-    good_ones = [1000922, 1000965, 1359959, 1353717, 1000057, 1101710, 1353543, 1101875,1367745,1000961,1000966,1347295,1356811,1101778,1353717,1347183, 1343617, 1000937, 1000915, 1337179]
+    good_ones = [1000976, 1000072, 1000974, 1102044, 1102000, 1000970, 1370936, 1367745,1000966,1000965,1359959,1356811,1101778,1353717,1353543,1000057,1347295,1347183,1101710]
     with open("sitrep_cache.pkl", "rb") as f:
         sitrep_list = pickle.load(f)
     return sitrep_list
