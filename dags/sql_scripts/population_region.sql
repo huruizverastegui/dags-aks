@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS population_by_region;
 
 CREATE TABLE population_by_region as (
 SELECT disasters_hex.event_id ,
-adm2_hex.gid2 AS adm2_hex_gid2,
-eapro_adm2."NAME_2" AS "eapro_adm2_NAME_2", 
+adm2_hex.gid2 AS gid2,
+eapro_adm2."NAME_2" AS "NAME_2", 
 sum(population_crosstab.children_under_five) AS children_under_five, 
 sum(population_crosstab.elderly_60_plus) AS elderly_60_plus, 
 sum(population_crosstab.men) AS men, 
