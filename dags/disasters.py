@@ -505,6 +505,12 @@ with DAG(
             postgres_conn_id="postgres_datafordecision",
             sql="sql_scripts/sitrep_hex_rss_duplicates.sql"
         )
+         
+        create_population_region_table = PostgresOperator(
+            task_id="create_population_region_table",
+            postgres_conn_id="postgres_datafordecision",
+            sql="sql_scripts/population_region.sql"
+        )
 
 
         get_disasters_resources>>create_disasters_table>>fill_disasters_table>>disasters_deduplicate
