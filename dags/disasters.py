@@ -514,4 +514,4 @@ with DAG(
 
 
         get_disasters_resources>>create_disasters_table>>fill_disasters_table>>disasters_deduplicate
-        get_disasters_resources>>create_hex_table>>fill_hex_table>>collate_hex_table>>hex_deduplicate
+        get_disasters_resources>>create_hex_table>>fill_hex_table>>collate_hex_table>>hex_deduplicate>>create_population_region_table
