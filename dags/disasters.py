@@ -512,6 +512,12 @@ with DAG(
             sql="sql_scripts/population_region.sql"
         )
 
+        create_connectivity_table = PostgresOperator(
+        task_id="create_connectivity_table",
+        postgres_conn_id="postgres_datafordecision",
+        sql="sql_scripts/meta_connectivity_formatting.sql"
+        )
+
 
         get_disasters_resources>>create_disasters_table>>fill_disasters_table>>disasters_deduplicate
         get_disasters_resources>>create_hex_table>>fill_hex_table>>collate_hex_table>>hex_deduplicate>>create_population_region_table
