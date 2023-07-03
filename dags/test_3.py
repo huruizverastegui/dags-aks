@@ -44,8 +44,8 @@ def get_bbox_format_rss(bbox):
     return list(np.float_(bbox.split(" ")))
 
 #function used to tranform the bbox into a geometry in the case we extract the info from the gdac-api library
-def make_shapely_bbox(bbox):
-    return shp.geometry.box(*bbox, ccw=False)
+#def make_shapely_bbox(bbox):
+#    return shp.geometry.box(*bbox, ccw=False)
 
 # transform the list of coordinates into a polygon in the case we extract the info from the rss flux
 def get_polygon_rss(geojson_url):
