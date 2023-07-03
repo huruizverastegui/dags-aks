@@ -24,15 +24,17 @@ Preset configuration : Cost-optimized
 
 ## On that cluster -  install Airflow : 
 
-documentation: https://github.com/airflow-helm/charts/blob/main/charts/airflow/docs/guides/quickstart.md
+Airflow helm chart documentation: https://github.com/airflow-helm/charts/blob/main/charts/airflow/docs/guides/quickstart.md
 
 Connect to the aks cluster you just created by navigating to it and selecting connect
 Via the terminal : 
-'az login' to login into azure
+
+Git copy this repo into your machine and cd into the folder containing the values_stable.yaml file
+
+type 'az login' to login into azure
 Follow the instructions from the 'Azure CLI' tab : 'az account set --subscription xxx' and later 'az aks get-credentials --resource-group xxx'
 
 type in the following : 
-
 -- set the release-name & namespace
 export AIRFLOW_NAME="airflow-cluster"
 export AIRFLOW_NAMESPACE="airflow-cluster"
@@ -52,14 +54,15 @@ helm install \
  
 
 ## Use this adapted stable_values.yaml file 
-Main changes vs the usual one available here: 
-- Connection via git sync to the git repo containing the dags and sql files
-- additional requirements.txt
-- Change of the node type to load balancer for the web server to be able to connect externally to it
-
-- Make sure to have a public IP to assign to the load balancer 
-- decrease the volume size 
-
+Main changes vs the usual one available here https://github.com/airflow-helm/charts/blob/main/charts/airflow/values.yaml : 
+- row 31: changed the fernet key
+- row 37: changed the webserver SecretKey
+- row 74: changed the admin login 
+- row 119-136 : added a connection to our Postgres
+- row 218: added the pip packages to be installed in all pods
+- row 814: changed the web pod from clusterIP to Load balancer and attributed a public IP created in Azure to enable external traffic on the airflow UI 
+- row 1383-1410-1416-1420: enabled git sync to get the dags from a git repo
+- row 1923: disabled postgres persistency as it was causing errors   
 
 
 ### Deploy fronted Sitrep
