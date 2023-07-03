@@ -22,15 +22,28 @@ There were several options within Azure:
 Free services > Azure Kubernetes Service (AKS) - Create 
 Preset configuration : Cost-optimized 
 
-## On that cluster -  install Airflow 
+## On that cluster -  install Airflow : 
+
+documentation: https://github.com/airflow-helm/charts/blob/main/charts/airflow/docs/guides/quickstart.md
 
 Connect to the aks cluster you just created by navigating to it and selecting connect
 Via the terminal : 
 'az login' to login into azure
+Follow the instructions from the 'Azure CLI' tab : 'az account set --subscription xxx' and later 'az aks get-credentials --resource-group xxx'
 
+type in the following : 
+- 'create namespace aks-airflow' : create a namespace for airflow
+-
+- 
 
+## Use this adapted values.yaml file 
+Main changes vs the usual one : 
+- Connection via git sync to the git repo containing the dags and sql files
+- additional requirements.txt
+- Change of the node type to load balancer for the web server to be able to connect externally to it
 
-
+- Make sure to have a public IP to assign to the load balancer 
+- decrease the volume size 
 
 
 
