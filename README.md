@@ -17,6 +17,17 @@ There were several options within Azure:
 - Direct deployment via Docker container - tried it and run into several errors as it was more complex 
 - Deployment via Kubernetes and Helm chart - this was the easiest and most documented way - possible to directly deploy the official helm chart 
 
+
+## Set up an Kubernetes cluster 
+Free services > Azure Kubernetes Service (AKS) - Create 
+Preset configuration : Cost-optimized 
+
+## On that cluster -  install Airflow via helm
+
+
+
+
+
 ### Deploy fronted Sitrep
 
 #create the resource group 
