@@ -32,12 +32,27 @@ Via the terminal :
 Follow the instructions from the 'Azure CLI' tab : 'az account set --subscription xxx' and later 'az aks get-credentials --resource-group xxx'
 
 type in the following : 
-- 'create namespace aks-airflow' : create a namespace for airflow
--
-- 
 
-## Use this adapted values.yaml file 
-Main changes vs the usual one : 
+-- set the release-name & namespace
+export AIRFLOW_NAME="airflow-cluster"
+export AIRFLOW_NAMESPACE="airflow-cluster"
+
+-- create the namespace
+kubectl create ns "$AIRFLOW_NAMESPACE"
+
+-- install using helm 3
+helm install \
+  "$AIRFLOW_NAME" \
+  airflow-stable/airflow \
+  --namespace "$AIRFLOW_NAMESPACE" \
+  --version "8.X.X" \
+  --values ./values_stable.yaml
+  
+-- wait until the above command returns and resources become ready 
+ 
+
+## Use this adapted stable_values.yaml file 
+Main changes vs the usual one available here: 
 - Connection via git sync to the git repo containing the dags and sql files
 - additional requirements.txt
 - Change of the node type to load balancer for the web server to be able to connect externally to it
