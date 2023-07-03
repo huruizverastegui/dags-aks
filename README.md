@@ -22,7 +22,13 @@ There were several options within Azure:
 Free services > Azure Kubernetes Service (AKS) - Create 
 Preset configuration : Cost-optimized 
 
-## On that cluster -  install Airflow via helm
+## On that cluster -  install Airflow 
+
+Connect to the aks cluster you just created by navigating to it and selecting connect
+Via the terminal : 
+'az login' to login into azure
+
+
 
 
 
