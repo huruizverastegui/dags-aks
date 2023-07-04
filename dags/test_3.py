@@ -18,7 +18,7 @@ import xmltodict
 import requests_cache
 import shapely as shp
 import geowrangler
-from geowrangler import grids
+## from geowrangler import grids
 
 ## Arguments applied to the tasks, not the DAG in itself 
 default_args={
