@@ -36,20 +36,21 @@ Follow the instructions from the 'Azure CLI' tab : 'az account set --subscriptio
 
 type in the following : 
 -- set the release-name & namespace
+```
 export AIRFLOW_NAME="airflow-cluster"
 export AIRFLOW_NAMESPACE="airflow-cluster"
-
+```
 -- create the namespace
-kubectl create ns "$AIRFLOW_NAMESPACE"
+```kubectl create ns "$AIRFLOW_NAMESPACE"```
 
 -- install using helm 3
-helm install \
+```helm install \
   "$AIRFLOW_NAME" \
   airflow-stable/airflow \
   --namespace "$AIRFLOW_NAMESPACE" \
   --version "8.X.X" \
   --values ./values_stable.yaml
-  
+ ``` 
 -- wait until the above command returns and resources become ready 
  
 
@@ -68,14 +69,14 @@ Main changes vs the usual one available here https://github.com/airflow-helm/cha
 ### Deploy fronted Sitrep
 
 #create the resource group 
-az group create --name sitrep_registry --location eastus
+```az group create --name sitrep_registry --location eastus```
 
 #create the webplan to host the apps
-az appservice plan create \
+```az appservice plan create \
 --name webplan \
 --resource-group sitrep_registry \
 --sku B1 \
---is-linux
+--is-linux```
 
 ### Deploy backend Sitrep
 
@@ -96,20 +97,20 @@ ACR_PASSWORD=$(az acr credential show \
 --output tsv)
 
 #build the docker image
-az acr build \
+```az acr build \
   --resource-group sitrep_registry \
   --registry sitrepback \
-  --image sitrepback:latest .
+  --image sitrepback:latest .```
 
 #deploy the web app
 #the container password needs to be retrieved from the access keys in azure UI
-az webapp create \
+```az webapp create \
 --resource-group sitrep_registry \
 --plan webplan --name sitrepapi \
 --docker-registry-server-password <containerpassword> \
 --docker-registry-server-user sitrepback \
 --role acrpull \
---deployment-container-image-name sitrepback.azurecr.io/sitrepback:latest
+--deployment-container-image-name sitrepback.azurecr.io/sitrepback:latest```
 
 
 ## Set up an automated sync from a project repo to the airflow dag repo  
