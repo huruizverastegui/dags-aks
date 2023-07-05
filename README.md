@@ -107,13 +107,15 @@ az group create --name sitrep_registry --location eastus
 
 #deploy the web app
 #the container password needs to be retrieved from the access keys in azure UI
-```az webapp create \
+```
+az webapp create \
 --resource-group sitrep_registry \
 --plan webplan --name sitrepapi \
 --docker-registry-server-password <containerpassword> \
 --docker-registry-server-user sitrepback \
 --role acrpull \
---deployment-container-image-name sitrepback.azurecr.io/sitrepback:latest```
+--deployment-container-image-name sitrepback.azurecr.io/sitrepback:latest
+```
 
 
 ## Set up an automated sync from a project repo to the airflow dag repo  
