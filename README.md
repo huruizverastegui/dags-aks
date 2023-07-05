@@ -125,6 +125,7 @@ ssh-keygen -t ed25519 -C "test@gmail.com"
 -- set up a git hub secret in the source repo (unicef/hd4d_ppt) - with the private key
 -- create a yaml workflow file under     .github/workflows/
 
+```
 name: CI \
 on: \
   push: \
@@ -147,3 +148,4 @@ jobs: \
           target-branch: main \
           target-directory: 'dags/' \
           user-email: hugo.ruiz.verastegui@gmail.com \
+```
