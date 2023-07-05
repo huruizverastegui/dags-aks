@@ -110,3 +110,40 @@ az webapp create \
 --docker-registry-server-user sitrepback \
 --role acrpull \
 --deployment-container-image-name sitrepback.azurecr.io/sitrepback:latest
+
+
+## Set up an automated sync from a project repo to the airflow dag repo  
+
+-- follow the tutorial 
+-- https://levelup.gitconnected.com/github-action-to-automatically-push-to-another-repository-1e327862f067
+-- https://cpina.github.io/push-to-another-repository-docs/index.html
+
+-- set up ssh keys pair:
+ssh-keygen -t ed25519 -C "test@gmail.com"       
+
+-- set up a SSH deploy key in the target repo (huruizverastegui/dags-aks) - with the public key
+-- set up a git hub secret in the source repo (unicef/hd4d_ppt) - with the private key
+-- create a yaml workflow file under     .github/workflows/
+
+name: CI
+on:
+  push:
+    branches: [ staging ]
+    paths:
+      - 'data_engineering/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
+        with:
+          source-directory: 'data_engineering/dags/'
+          destination-github-username: 'huruizverastegui'
+          destination-repository-name: 'dags-aks'
+          target-branch: main
+          target-directory: 'dags/'
+          user-email: hugo.ruiz.verastegui@gmail.com
