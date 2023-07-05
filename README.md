@@ -125,25 +125,25 @@ ssh-keygen -t ed25519 -C "test@gmail.com"
 -- set up a git hub secret in the source repo (unicef/hd4d_ppt) - with the private key
 -- create a yaml workflow file under     .github/workflows/
 
-name: CI
-on:
-  push:
-    branches: [ staging ]
-    paths:
-      - 'data_engineering/**'
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
-        with:
-          source-directory: 'data_engineering/dags/'
-          destination-github-username: 'huruizverastegui'
-          destination-repository-name: 'dags-aks'
-          target-branch: main
-          target-directory: 'dags/'
-          user-email: hugo.ruiz.verastegui@gmail.com
+name: CI \
+on: \
+  push: \
+    branches: [ staging ] \
+    paths: \
+      - 'data_engineering/**' \
+jobs: \
+  build: \
+    runs-on: ubuntu-latest \
+    steps: \
+      - uses: actions/checkout@v2 \
+      - name: Pushes to another repository \
+        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key \
+        env: \
+          SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }} \
+        with: \
+          source-directory: 'data_engineering/dags/' \
+          destination-github-username: 'huruizverastegui' \
+          destination-repository-name: 'dags-aks' \
+          target-branch: main \
+          target-directory: 'dags/' \
+          user-email: hugo.ruiz.verastegui@gmail.com \
