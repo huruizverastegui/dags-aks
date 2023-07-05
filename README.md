@@ -92,14 +92,16 @@ az group create --name sitrep_registry --location eastus
 ```az acr create --resource-group sitrep_registry --name sitrepback --sku Basic --admin-enabled true```
 
 
-```ACR_PASSWORD=$(az acr credential show \
+```
+ACR_PASSWORD=$(az acr credential show \
 --resource-group sitrep_registry \
 --name sitrepback \
 --query "passwords[?name == 'password'].value" \
 --output tsv)
 ```
 #build the docker image
-```az acr build \
+```
+az acr build \
   --resource-group sitrep_registry \
   --registry sitrepback \
   --image sitrepback:latest .
