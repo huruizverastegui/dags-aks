@@ -102,7 +102,8 @@ az group create --name sitrep_registry --location eastus
 ```az acr build \
   --resource-group sitrep_registry \
   --registry sitrepback \
-  --image sitrepback:latest .```
+  --image sitrepback:latest .
+```
 
 #deploy the web app
 #the container password needs to be retrieved from the access keys in azure UI
