@@ -1,4 +1,4 @@
-# Set up of the FDTN Infrastructure
+# Set up of the FDTN Infrastructure 
 
 ## Main needs: 
 - Pipeline orchestrator
