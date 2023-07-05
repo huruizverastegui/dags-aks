@@ -72,11 +72,13 @@ Main changes vs the usual one available here https://github.com/airflow-helm/cha
 ```az group create --name sitrep_registry --location eastus```
 
 #create the webplan to host the apps
-```az appservice plan create \
+```
+az appservice plan create \
 --name webplan \
 --resource-group sitrep_registry \
 --sku B1 \
---is-linux```
+--is-linux
+```
 
 ### Deploy backend Sitrep
 
@@ -87,15 +89,15 @@ az group create --name sitrep_registry --location eastus
 
 #create the container registry
 
-az acr create --resource-group sitrep_registry --name sitrepback --sku Basic --admin-enabled true
+```az acr create --resource-group sitrep_registry --name sitrepback --sku Basic --admin-enabled true```
 
 
-ACR_PASSWORD=$(az acr credential show \
+```ACR_PASSWORD=$(az acr credential show \
 --resource-group sitrep_registry \
 --name sitrepback \
 --query "passwords[?name == 'password'].value" \
 --output tsv)
-
+```
 #build the docker image
 ```az acr build \
   --resource-group sitrep_registry \
