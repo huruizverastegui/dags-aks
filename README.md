@@ -161,3 +161,20 @@ After deploying the app for the first time via the tutorial above (front end and
 Go to the app in the Azure UI > Deployment > Deployment center 
 Select Github actions 
 Go to the github repo > the workflow file that has been created > update the document 
+
+## Set up user access 
+Go to the Azure Active Directory 
+Create 2 group : viewers / admin 
+Add the relevant users in each group
+
+Go to the subscription page 
+
+## set up test user with password 
+
+## set up authentification for the apps
+Go to the app 
+
+
+## Force https 
+
+##
