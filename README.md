@@ -155,3 +155,9 @@ jobs: \
           target-directory: 'dags/' \
           user-email: hugo.ruiz.verastegui@gmail.com \
 ```
+
+## Continuous deployment into Azure
+After deploying the app for the first time via the tutorial above (front end and back end )
+Go to the app in the Azure UI > Deployment > Deployment center 
+Select Github actions 
+Go to the github repo > the workflow file that has been created > update the document 
