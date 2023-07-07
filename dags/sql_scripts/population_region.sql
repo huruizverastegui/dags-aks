@@ -13,13 +13,15 @@ sum(population_crosstab.women) AS women,
 sum(population_crosstab.women_of_reproductive_age_15_49) AS women_of_reproductive_age_15_49, 
 sum(population_crosstab.youth_15_24) AS youth_15_24, 
 sum(population_crosstab.general) AS general, 
-sum(schools.count) AS school_count 
+sum(schools.count) AS school_count ,
+sum(hopsitals.count) AS hospital_count 
 
 FROM population_crosstab 
 LEFT JOIN disasters_hex ON population_crosstab.h3_08 = disasters_hex.h3_08 
 LEFT JOIN adm2_hex ON disasters_hex.h3_08 = adm2_hex.h3_08 
 LEFT JOIN eapro_adm2 ON adm2_hex.gid2 = eapro_adm2."GID_2" 
 LEFT JOIN schools ON schools.h3_08 = adm2_hex.h3_08 
+LEFT JOIN hospitals ON hospitals.h3_08 = adm2_hex.h3_08 
 GROUP BY disasters_hex.event_id, adm2_hex.gid2, eapro_adm2."NAME_2" 
 ORDER BY children_under_five DESC 
 );
